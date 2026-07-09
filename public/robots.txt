@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://samarmukhtar.design/sitemap.xml

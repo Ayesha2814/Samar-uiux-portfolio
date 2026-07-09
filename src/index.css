@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection {
+  background-color: #D7E94A;
+  color: #0B2B2A;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-body antialiased;
+  background-color: #F5F2E8;
+  color: #0E1A18;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.dark body {
+  background-color: #081F1E;
+  color: #F5F2E8;
+}
+
+/* Grain overlay for editorial/poster texture */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.duotone {
+  position: relative;
+  overflow: hidden;
+}
+.duotone img {
+  filter: grayscale(1) contrast(1.15);
+  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
+}
+.duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: color;
+  background: linear-gradient(160deg, #D7E94A 0%, #123A38 100%);
+  opacity: 0.85;
+  transition: opacity 0.5s ease;
+}
+.duotone:hover img {
+  transform: scale(1.04);
+}
+.duotone:hover::after {
+  opacity: 0.55;
+}
+
+.eyebrow {
+  @apply font-mono uppercase tracking-widest2 text-[11px];
+}
+
+.text-outline {
+  -webkit-text-stroke: 1.5px #0E1A18;
+  color: transparent;
+}
+.dark .text-outline {
+  -webkit-text-stroke: 1.5px #F5F2E8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
